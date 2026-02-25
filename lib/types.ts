@@ -10,6 +10,8 @@ export interface GroceryItem {
   list_id: string;
   name: string;
   qty: string | null;
+  unit: string | null;
+  price: number | null;
   bought: boolean;
   sort_order: number;
   created_at: string;

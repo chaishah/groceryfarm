@@ -15,10 +15,16 @@ create table items (
   list_id uuid not null references lists(id) on delete cascade,
   name text not null,
   qty text,
+  unit text,
+  price numeric(10, 2),
   bought boolean not null default false,
   sort_order integer not null default 0,
   created_at timestamptz default now() not null
 );
+
+-- Migration: run these if upgrading an existing database
+-- alter table items add column if not exists unit text;
+-- alter table items add column if not exists price numeric(10, 2);
 
 create index items_list_id_idx on items(list_id);
 
