@@ -22,6 +22,8 @@ export async function POST(
   const body = await request.json();
   const name = body?.name?.trim();
   const qty = body?.qty?.trim() || null;
+  const unit = body?.unit?.trim() || null;
+  const price = body?.price != null && body.price !== '' ? parseFloat(body.price) : null;
 
   if (!name) return NextResponse.json({ error: 'Name is required' }, { status: 400 });
 
@@ -40,7 +42,7 @@ export async function POST(
 
   const { data, error } = await supabase
     .from('items')
-    .insert({ list_id: listId, name, qty, sort_order })
+    .insert({ list_id: listId, name, qty, unit, price, sort_order })
     .select()
     .single();
 
